@@ -1,12 +1,13 @@
 public class ProbCalc {
 
+	
+	//This class is used to calculate and print the probability based on the already organised data.
 	float probPos = 1;
-	float temppos = 1;
 	float negPos = 1;
-	float negpos = 1;
-	float pos =1;
-	float neg = 1;
-	float swap =0;
+	
+	
+
+
 	
 	public float  calculatepos(float Temp)  {
 
@@ -34,9 +35,16 @@ public float  calculateNeg(float Temp) {
 
 
 
-public void calctest() {
+public float calctest() {
+	
+	
+	
 	float pos =1;
 	float neg = 1;
+	float swap =0;
+	
+	
+	
 	
 	if(gui.Cough == true) {
 		pos = pos * calculatepos(data.pCoughPositive);
@@ -135,9 +143,9 @@ public void calctest() {
 	System.out.println("chance of having corona is "+pos + " percent");
 	System.out.println("chance of NOT having corona is "+neg+ " percent");
 	
-	
+	return pos;
 
-}
+	}
 }
 
 

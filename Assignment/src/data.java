@@ -7,27 +7,33 @@ import java.util.Scanner;
 public class data {
 	
 	
-	//This counter is used further on to organise the data into the seperate arraylists
-	// which are also initialised here.Each list will have the result and also if 
-	// the person had corona EG: if a person is hot and has corona the Temp list will
-	// have [hot,yes]
+	//Variables are created here which will hold the probability (p) of a certain case.
+	//pHotPositive holds the probability of being hot and testing positive for the virus
+	//pHotNegative holds the probability of being hot and testing negative for the virus.
+	//these variables are made public static so other classes have access to them.
 	
-	int i = 0;
+	
+	//The counter is used further on to organise the data into the seperate arraylists
+	//which are also created here.Each list will simply hold if a certain patient has
+	//a cough/aches/sore throat etc  or doesn't. Another list (corona) holds if that same patient does
+	//or does not have the virus.
+	
+	
 	public static float pHotPositive  ,pHotNegative  ,pColdPositive  ,pColdNegative  ,pCoolPositive  ,pCoolNegative  ,pNormalPositive  ,pNormalNegative;
 	public static float pAchesPositive ,pAchesNegative ,pNoAchesPositive ,pNoAchesNegative;
-	public static float pCoughPositive;
-	public static float pCoughNegative;
-	public static float pNoCoughPositive;
-	public static float pNoCoughNegative;
-	public static float  pThroatPositive, pThroatNegative, pNoThroatPositive, pNoThroatNegative;
-	public static float pRecentlyPositive ,pRecentlyNegative,pNoRecentlyPositive ,pNoRecentlyNegative;
+	public static float pCoughPositive  ,pCoughNegative;
+	public static float pNoCoughPositive ,pNoCoughNegative;
+	public static float pThroatPositive, pThroatNegative, pNoThroatPositive, pNoThroatNegative;
+	public static float pRecentlyPositive ,pRecentlyNegative ,pNoRecentlyPositive ,pNoRecentlyNegative;
 	int counter = 0;
 	int pcounter = 0;
 	int ncounter = 0;
 	float positive = 0;
 	float negative = 0;
 	
-	 ArrayList<ArrayList<String> > aList =   new ArrayList<ArrayList<String> >(6); 
+	
+	
+	ArrayList<ArrayList<String> > aList =   new ArrayList<ArrayList<String> >(6); 
 	List<String> Temp = new ArrayList<>();
 	List<String> Aches = new ArrayList<>();
 	List<String> Cough = new ArrayList<>();
@@ -51,12 +57,13 @@ public class data {
 			
 			
 		//running through the csv file as long as there is another value
-		//then passing the value onto organis
+		//then passing the value onto organiseData
 		
 		
 		while (s.hasNextLine()) {
 		organiseData(text);
 		text = s.next();
+		
 		
 		
 		}	
@@ -146,14 +153,15 @@ public class data {
 			return "error";
 		}
 		
+		
 	}
-	
+
 		
 		
 		
 		
-	//this places data eg temp , aches(yes or no) sore throat etc into an array list aswell as if that
-	// data also has coronavirus
+	//this places data eg aches(yes or no) into an array list 
+	//
 	//A counter is used to go through the 5 options for each case and then start again.
 	public void organiseData(String text) {
 		
@@ -343,7 +351,7 @@ public class data {
 		
 	}
 	
-public void sortTempCold(List<String> list,List<String> corona) {
+	public void sortTempCold(List<String> list,List<String> corona) {
 		
 		positive = 0; //no yes
 		negative = 0; // no no
@@ -378,37 +386,37 @@ public void sortTempCold(List<String> list,List<String> corona) {
 	}
 	
 	
-public void sortTempNormal(List<String> list,List<String> corona) {
+	public void sortTempNormal(List<String> list,List<String> corona) {
 	
-	positive = 0; //no yes
-	negative = 0; // no no
-	ncounter = 0;
-	
-	
-	//both of these for loops are used to iterate through two lists one always
-	//being if the person had corona or not.
-	
-	
-	// corona no hot 
-	for(int i=0;i<corona.size();i++) {
-		if(corona.get(i).contains("y") && list.get(i).contains("n")) {
-			positive++;
-			ncounter++;
+		positive = 0; //no yes
+		negative = 0; // no no
+		ncounter = 0;
+		
+		
+		//both of these for loops are used to iterate through two lists one always
+		//being if the person had corona or not.
+		
+		
+		// corona no hot 
+		for(int i=0;i<corona.size();i++) {
+			if(corona.get(i).contains("y") && list.get(i).contains("n")) {
+				positive++;
+				ncounter++;
+			}
+			
+			
+			
+			
 		}
 		
-		
-		
-		
-	}
-	
-	// corona  yes hot
-	for(int i=0;i<corona.size();i++) {
-		if(corona.get(i).contains("o") && list.get(i).contains("n")) {
-			negative++;
-			ncounter++;
+		// corona  yes hot
+		for(int i=0;i<corona.size();i++) {
+			if(corona.get(i).contains("o") && list.get(i).contains("n")) {
+				negative++;
+				ncounter++;
+			}
 		}
 	}
-}
 	
 	
 	public void sortTempCool(List<String> list,List<String> corona) {
@@ -445,18 +453,7 @@ public void sortTempNormal(List<String> list,List<String> corona) {
 }
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
 

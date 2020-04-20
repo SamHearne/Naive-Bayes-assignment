@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+
 
 
 
@@ -13,7 +15,7 @@ import javax.swing.JComboBox;
 public class gui  extends JFrame implements ActionListener {
 	
 	public static int tempNo = 1;
-	int test = 0;
+	float test = 0;
 	public static boolean Cough = true;
 	public static boolean Aches = true;
 	public static boolean Throat = true;
@@ -29,11 +31,15 @@ public class gui  extends JFrame implements ActionListener {
 	
 	
 	//adding labels,buttons,panels etc
-	JLabel label1,label2,label3,label4,label5,label6;
+	JLabel temperatureLabel,achesLabel,coughLabel,soreThroatLabel,contactLabel,resultLabel;
 		
-		
+	//Button
+	JButton Check;
+	
+	
+	
 	//panels are used to control where attributes will appear (see below)
-	JPanel topPanel1;
+	JPanel topPanel,bottomPanel;
 	
 		
 
@@ -45,96 +51,108 @@ public class gui  extends JFrame implements ActionListener {
 		super(title);
 			
 			
-			JComboBox TempBox = new JComboBox(tempOptions);
-			JComboBox AchesBox = new JComboBox(Options);
-			JComboBox CoughBox = new JComboBox(Options);
-			JComboBox ThroatBox = new JComboBox(Options);
-			JComboBox RecentlyBox = new JComboBox(Options);
+		
+		//creating comboBoxes to hold each option
+		JComboBox TempBox = new JComboBox(tempOptions);
+		JComboBox AchesBox = new JComboBox(Options);
+		JComboBox CoughBox = new JComboBox(Options);
+		JComboBox ThroatBox = new JComboBox(Options);
+		JComboBox RecentlyBox = new JComboBox(Options);
 			
-			//setting the size of the window and the layout
-			setSize(1000, 200);
-			BorderLayout bl1 = new BorderLayout();
-			setLayout(bl1);
-			
-			
-			
-			
-			
-			//creating labels
-			label1 = new JLabel("Temperature :");
-			label2 = new JLabel("Aches :");
-			label3 = new JLabel("Cough :");
-			label4 = new JLabel("Sore Throat :");
-			label5 = new JLabel("Recent Contact :");
-			label6 = new JLabel("Result :");
+		//setting the size of the window and the layout
+		setSize(1000, 200);
+		BorderLayout bl1 = new BorderLayout();
+		setLayout(bl1);
 			
 			
 			
 			
 			
+		//creating labels
+		temperatureLabel = new JLabel("Temperature :");
+		achesLabel = new JLabel("Aches :");
+		coughLabel = new JLabel("Cough :");
+		soreThroatLabel = new JLabel("Sore Throat :");
+		contactLabel = new JLabel("Recent Contact :");
+		resultLabel = new JLabel();
 			
-			//creating jpanels
-			
-			topPanel1 = new JPanel();
 			
 			
-			
-			
-			topPanel1.add(label1);
-			topPanel1.add(TempBox);
-			topPanel1.add(label2);
-			topPanel1.add(AchesBox);
-			topPanel1.add(label3);
-			topPanel1.add(CoughBox);
-			topPanel1.add(label4);
-			topPanel1.add(ThroatBox);
-			topPanel1.add(label5);
-			topPanel1.add(RecentlyBox);
-			topPanel1.add(label6);
-			add(topPanel1,BorderLayout.NORTH);
+		//Creating a button to allow the user to check results
+		Check = new JButton("Check results");
+		Check.addActionListener(this);
 			
 			
 			
 			
-			TempBox.addActionListener(
-					new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							String currentQuantity = (String)TempBox.getSelectedItem();
+			
+		//creating jpanels
+		topPanel = new JPanel();
+		bottomPanel = new JPanel();
+			
+			
+			
+			
+		topPanel.add(temperatureLabel);
+		topPanel.add(TempBox);
+		topPanel.add(achesLabel);
+		topPanel.add(AchesBox);
+		topPanel.add(coughLabel);
+		topPanel.add(CoughBox);
+		topPanel.add(soreThroatLabel);
+		topPanel.add(ThroatBox);
+		topPanel.add(contactLabel);
+		topPanel.add(RecentlyBox);
+		bottomPanel.add(Check);
+			
+		bottomPanel.add(resultLabel);
+		
+		add(topPanel,BorderLayout.NORTH);
+		add(bottomPanel,BorderLayout.SOUTH);
+			
+			
+		//The following action listeners are used to check which option is selected in each combobox
+		//and then change the corresponding variable to that option.
+		TempBox.addActionListener(
+				
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String currentQuantity = (String)TempBox.getSelectedItem();
 							                    
-							switch(currentQuantity) {
+					switch(currentQuantity) {
 									                        	
-								case "Hot":
-									tempNo = 1;
+						case "Hot":
+							tempNo = 1;
 									
-									calc.calctest();
+									
 								
-								break;
+						break;
 										                        		
-								case "Cold":
-									tempNo = 2;
-									calc.calctest();
+						case "Cold":
+							tempNo = 2;
 									
-								break;
-								
-								
-								
-								case "Cool":
-									tempNo = 3;
-									calc.calctest();
 									
-								break;
+						break;
 								
 								
 								
-								case "Normal":
-									tempNo = 4;
-									calc.calctest();
+						case "Cool":
+							tempNo = 3;
+									
+									
+						break;
 								
-								break;
-							}
-						}
-					}            
-				);
+								
+								
+						case "Normal":
+							tempNo = 4;
+									
+								
+						break;
+					}
+				}
+			}            
+		);
 			
 			
 			
@@ -146,7 +164,7 @@ public class gui  extends JFrame implements ActionListener {
 			
 			
 			
-			AchesBox.addActionListener(
+		AchesBox.addActionListener(
 				new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						String currentQuantity = (String)AchesBox.getSelectedItem();
@@ -155,12 +173,12 @@ public class gui  extends JFrame implements ActionListener {
 								                        	
 							case "Yes":
 							Aches = true;
-							calc.calctest();
+						
 							break;
 									                        		
 							case "No":
 							Aches = false;
-							calc.calctest();
+							
 							
 							break;
 						}
@@ -170,91 +188,95 @@ public class gui  extends JFrame implements ActionListener {
 			);
 					
 		
-			CoughBox.addActionListener(
-					new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							String currentQuantity = (String)CoughBox.getSelectedItem();
+		CoughBox.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String currentQuantity = (String)CoughBox.getSelectedItem();
 									                       
-							switch(currentQuantity) {
+					switch(currentQuantity) {
 									                        	
-								case "Yes":
-								Cough = true;
-								calc.calctest();
+						case "Yes":
+						Cough = true;
 								
-								break;
+								
+						break;
 										                        		
-								case "No":
-								Cough = false;
-								calc.calctest();
+						case "No":
+						Cough = false;
 								
-								break;
-							}
-						}
-					}            
-				);
+								
+						break;
+					}
+				}
+			}            
+		);
 			
 			
 			
 			
 			
-			ThroatBox.addActionListener(
-					new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							String currentQuantity = (String)ThroatBox.getSelectedItem();
+		ThroatBox.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String currentQuantity = (String)ThroatBox.getSelectedItem();
 									                       
-							switch(currentQuantity) {
+					switch(currentQuantity) {
 									                        	
-								case "Yes":
-								Throat = true;
-								calc.calctest();
+						case "Yes":
+						Throat = true;
 								
-								break;
+								
+						break;
 										                        		
-								case "No":
-								Throat = false;
-								calc.calctest();
+						case "No":
+						Throat = false;
 								
-								break;
-							}
+								
+						break;
+					}
 							
-						}
-					}            
-				);
+				}
+			}            
+		);
 			
-			RecentlyBox.addActionListener(
-					new ActionListener(){
-						public void actionPerformed(ActionEvent e){
-							String currentQuantity = (String)RecentlyBox.getSelectedItem();
+		
+		
+		RecentlyBox.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					String currentQuantity = (String)RecentlyBox.getSelectedItem();
 									                       
-							switch(currentQuantity) {
+					switch(currentQuantity) {
 									                        	
-								case "Yes":
-								Recently = true;
-								calc.calctest();
-								
-								break;
-										                        		
-								case "No":
-								Recently = false;
-								calc.calctest();
-								
-								break;
-							}
+						case "Yes":
+						Recently = true;
 							
-						}
-					}            
-				);
+								
+						break;
+										                        		
+						case "No":
+						Recently = false;
+								
+								
+						break;
+					}
+							
+				}
+			}            
+		);
 			
 			
-			setVisible(true);
+		setVisible(true);
 			
 	}
 
 
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	//This will return the result of the currently selected options once the check result button is pressed
+	public void actionPerformed(ActionEvent e) {
+		
+		test = calc.calctest();
+		resultLabel.setText("Chance of having corona is " + test);
 		
 	}
 }

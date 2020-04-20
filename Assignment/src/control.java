@@ -10,27 +10,14 @@ public class control {
 
 	public static void main(String[] args){
 		
-		
-		
-		
-		
-		
-		gui userinterface = new gui("test");
+		gui userinterface = new gui("Corona virus probability tester");
 		data data = new data();
 		data.readData();
 		
-		
-		
-		
-		
-		//here the probabilites are normalized (eg they add up to 1)
-		// and then mutliplied to show them as a percentage out of 100
-	
-	
 	}
 		
 
-	}
+}
 	
 
 

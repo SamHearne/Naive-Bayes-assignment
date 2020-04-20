@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,8 +35,9 @@ public class gui  extends JFrame implements ActionListener {
 	//adding labels,buttons,panels etc
 	JLabel temperatureLabel,achesLabel,coughLabel,soreThroatLabel,contactLabel,resultLabel;
 		
-	//Button
-	JButton Check;
+	//creating buttons. The link button uses your default browser to open 
+	//John Hopkins university of medicines page on the corona virus
+	JButton Check,Link;
 	
 	
 	
@@ -81,6 +84,8 @@ public class gui  extends JFrame implements ActionListener {
 		//Creating a button to allow the user to check results
 		Check = new JButton("Check results");
 		Check.addActionListener(this);
+		Link= new JButton("Corona Virus information");
+		Link.addActionListener(this);
 			
 			
 			
@@ -104,6 +109,7 @@ public class gui  extends JFrame implements ActionListener {
 		topPanel.add(contactLabel);
 		topPanel.add(RecentlyBox);
 		bottomPanel.add(Check);
+		bottomPanel.add(Link);
 			
 		bottomPanel.add(resultLabel);
 		
@@ -275,11 +281,22 @@ public class gui  extends JFrame implements ActionListener {
 	//This will return the result of the currently selected options once the check result button is pressed
 	public void actionPerformed(ActionEvent e) {
 		
+		if(e.getSource() == Check) {
+			
+		
 		test = calc.calctest();
 		resultLabel.setText("Chance of having corona is " + test);
+		}
 		
+		
+		if(e.getSource() == Link) {
+			try {
+			    Desktop.getDesktop().browse(new URL("https://coronavirus.jhu.edu/map.html").toURI());
+			} catch (Exception d) {}
+		}
 	}
 }
+
 
 
 

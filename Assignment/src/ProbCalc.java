@@ -19,7 +19,7 @@ public class ProbCalc {
 	}
 	
 	
-public float  calculateNeg(float Temp) {
+	public float  calculateNeg(float Temp) {
 		
 		
 		negPos = negPos * Temp;
@@ -33,7 +33,8 @@ public float  calculateNeg(float Temp) {
 
 
 
-
+//This method multiplies all the probabilites together based on the options you selected in the gui.
+//The chance of you having and not having the virus are both found based on your options.
 
 public float calctest() {
 	
@@ -136,7 +137,7 @@ public float calctest() {
 	
 	
 	//here the probabilites are normalized (eg they add up to 1)
-	// and then mutliplied to show them as a percentage out of 100
+	//and then mutliplied to show them as a percentage out of 100
 	swap = pos;
 	pos = pos/(pos+neg)* 100;
 	neg = neg/(swap+neg)* 100;
